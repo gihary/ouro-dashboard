@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState } from "react";
 import "./App.css";
 
@@ -31,10 +30,11 @@ function App() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer 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",
+          Authorization:
+            "Bearer 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", // ✅ Chiave valida per test freemium
         },
         body: JSON.stringify({
-          model: "gpt-4",
+          model: "gpt-3.5-turbo", // ✅ Compatibile con tutti i piani
           messages: [
             {
               role: "system",
@@ -50,12 +50,11 @@ function App() {
       });
 
       const data = await res.json();
-      console.log("🧠 Risposta completa da OpenAI:", data); // 🔍 Mostra tutto
+      console.log("🧠 Risposta completa da OpenAI:", data);
 
       if (data.choices && data.choices.length > 0 && data.choices[0].message) {
         setResponse(data.choices[0].message.content);
       } else if (data.error) {
-        // ⚠️ Mostra eventuale errore da OpenAI
         setResponse(`❌ Errore OpenAI: ${data.error.message}`);
         console.error("Errore OpenAI:", data.error);
       } else {
