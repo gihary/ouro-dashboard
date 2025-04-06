@@ -31,10 +31,10 @@ function App() {
         headers: {
           "Content-Type": "application/json",
           Authorization:
-            "Bearer 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", // ✅ Chiave valida per test freemium
+            "Bearer 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",
         },
         body: JSON.stringify({
-          model: "gpt-3.5-turbo", // ✅ Compatibile con tutti i piani
+          model: "gpt-4o-mini",
           messages: [
             {
               role: "system",
@@ -50,19 +50,18 @@ function App() {
       });
 
       const data = await res.json();
-      console.log("🧠 Risposta completa da OpenAI:", data);
+      console.log("🧠 Risposta completa:", data);
 
       if (data.choices && data.choices.length > 0 && data.choices[0].message) {
         setResponse(data.choices[0].message.content);
       } else if (data.error) {
         setResponse(`❌ Errore OpenAI: ${data.error.message}`);
-        console.error("Errore OpenAI:", data.error);
       } else {
         setResponse("⚠️ Nessuna risposta utile.");
       }
     } catch (error) {
-      console.error("❌ Errore fetch:", error);
-      setResponse("❌ Errore nella richiesta. Controlla la console.");
+      console.error("❌ Errore nella richiesta:", error);
+      setResponse("❌ Errore durante la connessione all'API.");
     } finally {
       setLoading(false);
     }
@@ -132,4 +131,3 @@ function App() {
 }
 
 export default App;
-
