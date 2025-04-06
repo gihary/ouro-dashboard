@@ -50,11 +50,19 @@ function App() {
       });
 
       const data = await res.json();
-      console.log("🧠 DATA:", data);
-      const reply = data.choices?.[0]?.message?.content || "⚠️ Nessuna risposta utile.";
-      setResponse(reply);
+      console.log("🧠 Risposta completa da OpenAI:", data); // 🔍 Mostra tutto
+
+      if (data.choices && data.choices.length > 0 && data.choices[0].message) {
+        setResponse(data.choices[0].message.content);
+      } else if (data.error) {
+        // ⚠️ Mostra eventuale errore da OpenAI
+        setResponse(`❌ Errore OpenAI: ${data.error.message}`);
+        console.error("Errore OpenAI:", data.error);
+      } else {
+        setResponse("⚠️ Nessuna risposta utile.");
+      }
     } catch (error) {
-      console.error("❌ Errore:", error);
+      console.error("❌ Errore fetch:", error);
       setResponse("❌ Errore nella richiesta. Controlla la console.");
     } finally {
       setLoading(false);
@@ -125,3 +133,4 @@ function App() {
 }
 
 export default App;
+
