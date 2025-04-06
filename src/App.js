@@ -50,11 +50,12 @@ function App() {
       });
 
       const data = await res.json();
-      const reply = data.choices?.[0]?.message?.content || "Nessuna risposta.";
+      console.log("🧠 DATA:", data); // 👈 LOG AGGIUNTO
+      const reply = data.choices?.[0]?.message?.content || "⚠️ Nessuna risposta utile.";
       setResponse(reply);
     } catch (error) {
-      console.error("Errore:", error);
-      setResponse("Si è verificato un errore. Riprova.");
+      console.error("❌ Errore:", error); // 👈 LOG ERRORE
+      setResponse("❌ Errore nella richiesta. Controlla la console.");
     } finally {
       setLoading(false);
     }
@@ -124,4 +125,3 @@ function App() {
 }
 
 export default App;
-
