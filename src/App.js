@@ -31,7 +31,7 @@ function App() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer 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",
+          Authorization: "Bearer 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",
         },
         body: JSON.stringify({
           model: "gpt-4",
@@ -50,11 +50,11 @@ function App() {
       });
 
       const data = await res.json();
-      console.log("🧠 DATA:", data); // 👈 LOG AGGIUNTO
+      console.log("🧠 DATA:", data);
       const reply = data.choices?.[0]?.message?.content || "⚠️ Nessuna risposta utile.";
       setResponse(reply);
     } catch (error) {
-      console.error("❌ Errore:", error); // 👈 LOG ERRORE
+      console.error("❌ Errore:", error);
       setResponse("❌ Errore nella richiesta. Controlla la console.");
     } finally {
       setLoading(false);
